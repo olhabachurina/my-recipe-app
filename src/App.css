@@ -1,38 +1,227 @@
-.App {
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: url('./assets/images/image12.jpg'); /* Используем текстуру дерева как фон */
+  background-size: cover; /* Изображение покрывает всю область */
+  background-repeat: no-repeat; /* Изображение не повторяется */
+  background-position: center center; /* Центрируем фон */
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.7); /* Прозрачный белый фон */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.2);
+  max-width: 1100px; /* Ограничиваем ширину */
+  margin: 20px auto; /* Центрируем контейнер */
+  backdrop-filter: blur(2px); /* Легкое размытие фона за текстом */
+}
+
+#head, #ingredients, #steps, #image {
+  margin: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#head {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1, h2 {
+  color: #a83232;
+  font-family: 'Georgia', serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-top: 10px;
+}
+
+/* Ingredients List */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+li::before {
+  content: "•";
+  color: #a83232;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+/* Image styling */
+#image img {
+  max-width: 100%;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+#image img:hover {
+  transform: scale(1.05);
+}
+
+/* Hover effects on headings */
+h1:hover, h2:hover {
+  color: #e63946;
+  transition: color 0.3s ease-in-out;
+}
+
+/* Button styles */
+button {
+  background-color: #a83232;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #e63946;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Responsive Layout */
+@media (max-width: 768px) {
+  #head, #ingredients, #steps, #image {
+    margin: 10px;
+    padding: 15px;
+  }
+}
+
+h1, h2 {
+  font-size: 2.5em;
+  color: #8B0000;
+  margin-bottom: 20px;
+}
+
+
+/* Side containers for scrolling images */
+.side-container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 150px;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.left-images, .right-images {
+  position: absolute;
+  top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+.left-side {
+  left: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.right-side {
+  right: 0;
+}
+
+.image-item {
+  margin-bottom: 20px;
+  width: 260px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.container-content {
+  margin: 0 150px; /* Отступы для центрального контента */
+}
+
+/* Scroll animation */
+@keyframes scrollImages {
+  0% {
+    transform: translateY(0);
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    transform: translateY(-100%);
   }
+}
+
+.auto-scroll {
+  animation: scrollImages 20s linear infinite; /* Замедляем скролл до 20 секунд */
+}
+
+/* Side images */
+.side-images {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 150px; /* Ширина контейнера для картинок */
+  height: 100vh; /* Высота по всему экрану */
+  overflow-y: auto; /* Вертикальная прокрутка */
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Отступы между картинками */
+}
+
+.side-images img {
+  width: 100%; /* Заполнение ширины контейнера */
+  height: auto; /* Автоматическая подстройка высоты */
+  border-radius: 10px; /* Закругленные углы */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Тень для глубины */
+}
+
+/* Right side images */
+.right-side-images {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.right-side-images img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Content block */
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
 }
